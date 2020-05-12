@@ -22,5 +22,5 @@ services:
     cache:
         image: redis:alpine
         ports: 
-            -'6379:6379'
+            - '6379:6379'
         command: ['--requirepass "secret"']            
