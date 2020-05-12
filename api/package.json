@@ -1,0 +1,32 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "dev": "ts-node-dev --transpileOnly --no-notify src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "connect-redis": "^4.0.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "ioredis": "^4.16.3",
+    "mongoose": "^5.9.13"
+  },
+  "devDependencies": {
+    "@types/connect-redis": "0.0.13",
+    "@types/express": "^4.17.6",
+    "@types/express-session": "^1.17.0",
+    "@types/ioredis": "^4.16.1",
+    "@types/mongodb": "^3.5.16",
+    "@types/mongoose": "^5.7.18",
+    "@types/node": "^13.13.5",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  }
+}
