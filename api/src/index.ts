@@ -7,12 +7,11 @@ import Redis from 'ioredis';
 import {MONGO_URI, MONGO_OPTIONS, REDIS_OPTIONS, APP_PORT} from './config'
 import {createApp} from './app'
 
-const uri = 'mongodb+srv://dinodzo:K3aHHYE5g689amRd@cluster0-4vdzn.mongodb.net/auth?retryWrites=true&w=majority'
 
 ;( async () => {
   try {
 
-    await mongoose.connect(uri, MONGO_OPTIONS);
+    await mongoose.connect(MONGO_URI, MONGO_OPTIONS);
 
     const RedisStore = connectRedis(session);
 

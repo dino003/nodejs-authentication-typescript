@@ -1,2 +1,4 @@
 /api/node_modules
 /api/dist
+.gitignore
+const uri = 'mongodb+srv://dinodzo:K3aHHYE5g689amRd@cluster0-4vdzn.mongodb.net/auth?retryWrites=true&w=majority'

@@ -3,12 +3,14 @@ version: '3'
 services: 
     db:
         user: $UID
-        image: mongo
+        image: mongo:latest
+        container_name: node_auth_mongo_database
+        restart: always
         ports: 
-            - '27017:27017'
+           - '24245:27017'
 
         environment:
-          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_USERNAME: admin
           MONGO_INITDB_ROOT_PASSWORD: secret
           MONGO_INITDB_DATABASE: auth
           MONGO_USERNAME: admin
@@ -16,11 +18,12 @@ services:
         
         volumes: 
             - ./data:/data/db
-            - ./mongo-init.sh:/docker-entrypoint-initdb.d/:ro
+            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
 
     cache:
         image: redis:alpine
+        container_name: node_auth_redis_cache
         ports: 
             - '6379:6379'
         command: ['--requirepass "secret"']            
