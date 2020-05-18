@@ -4,28 +4,29 @@ import express from 'express';
 import session  from 'express-session';
 import connectRedis from 'connect-redis';
 import Redis from 'ioredis';
-import {MONGO_URI, MONGO_OPTIONS, REDIS_OPTIONS, SESSION_OPTIONS, APP_PORT} from './config'
+import {MONGO_URI, MONGO_OPTIONS, REDIS_OPTIONS, APP_PORT} from './config'
+import {createApp} from './app'
+
+const uri = 'mongodb+srv://dinodzo:K3aHHYE5g689amRd@cluster0-4vdzn.mongodb.net/auth?retryWrites=true&w=majority'
 
 ;( async () => {
-    await mongoose.connect(MONGO_URI, MONGO_OPTIONS);
+  try {
+
+    await mongoose.connect(uri, MONGO_OPTIONS);
 
     const RedisStore = connectRedis(session);
 
-const client = new Redis(REDIS_OPTIONS);
+    const client = new Redis(REDIS_OPTIONS);
 
- 
-const app = express();
+    const store = new RedisStore({ client });
 
-app.use(
-    session( {
-        ...SESSION_OPTIONS,
-         store: new RedisStore({ client })}  
-    ) )
+    const app = createApp(store)
 
+    app.listen(APP_PORT, () => console.log('server started...'))
 
-app.get('/', (req, res) => res.json({message: 'cool'}));
-
-app.listen(APP_PORT, () => console.log('server started...'));
+}catch (error) {
+      console.log(error)
+  }
 
 })()
 
